@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1732714246 source:d:\iti\data structure\day2\ds -queue\main.cpp
+	<iostream>
+	"queue.h"
+
+1732714246 d:\iti\data structure\day2\ds -queue\include\queue.h
+

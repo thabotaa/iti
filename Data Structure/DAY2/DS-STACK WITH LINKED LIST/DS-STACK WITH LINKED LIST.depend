@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1732712699 source:d:\iti\data structure\day2\ds-stack with linked list\main.cpp
+	<iostream>
+	"LINKED LIST.h"
+
+1732712751 d:\iti\data structure\day2\ds-stack with linked list\include\linked list.h
+	"Node.h"
+
+1732708890 d:\iti\data structure\day2\ds-stack with linked list\include\node.h
+	<iostream>
+
