@@ -1,0 +1,18 @@
+Day6:
+======
+
+1- in "Shape" example, do changes required to overcome "Square & Circle Problems of setting different dim values":
+	- try "protected inheritance", 
+
+
+
+
+2- Composition/Aggregation Example: Point, Rect, Circle, Line + drawing graphics.
+	- each class should have: attributes, constructors, setters & getters, Draw()
+
+
+
+
+Note: 
+	- Students should Trace the code by F7 or F8 to see the sequence of calling of constructors.
+	- Check graphics settings on CodeBlocks

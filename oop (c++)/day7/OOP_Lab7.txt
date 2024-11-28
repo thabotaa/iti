@@ -1,0 +1,27 @@
+Day7:
+======
+1-
+- Composition Example: Point, Rect, Circle, Line + drawing graphics.
+	- each class should have: attributes, constructors, setters, Draw()
+ 
+- Aggregation Example: Picture, Point, Rect, Circle, Line + graphics.
+	- class Picture should have: attributes, constructors, setters, Paint()
+	- set color in (Rect, Circle, Line) before drawing.
+
+
+
+2- Late binding --> "Base-Drived-Derived_2" example (Multi-Level inheritance), try the following:
+	- create pointer from base points to object from drived "call drived function using base pointer"
+	- use "virtual" keyword, then try again to see what is the difference
+
+
+
+3- in "Shape" example, do changes required to:
+	- prevent anyone from creating object of shape class "make it abstract, 
+	- try using "pure virtual function: CalcArea()"
+
+
+Note: 
+- check graphics settings on CodeBlocks.
+- Students should Trace the code by F7 or F8 to see the sequence of calling of constructors.
+

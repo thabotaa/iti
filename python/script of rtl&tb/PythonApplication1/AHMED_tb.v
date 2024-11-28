@@ -1,0 +1,1 @@
+module AHMED_tb(); parameter ahmed#=2 

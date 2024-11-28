@@ -1,0 +1,24 @@
+Day8:
+======
+
+1- in "GeoShape" example, do changes required to:
+	- prevent anyone from creating object of shape class "make it abstract, using pure virtual function"
+	- make another function called "sumOfAllShapesArea", that takes Array of 4 shapes and return sum of these shapes areas.
+
+
+
+2- Continue the Picture Example:
+      - Write new class Shape with variable color + setters and getters.. Rect, Circle, and Line to Inherit from it.
+      - in class Shape Make function "Draw( )", a pure virtual function, then make necessary changes to other classes.
+      - Simplify the Picture class, so as to only be constructed by an array of Shapes (array of pointers to Shape), 
+	then use the pointer of base class to call the Draw( ) function of Circle, Rect, and Line.
+
+
+
+3- Try to navigate through "String" built-in class and try some of its functions
+
+
+Bouns:
+======
+- Draw "jagged Array" of shapes...
+

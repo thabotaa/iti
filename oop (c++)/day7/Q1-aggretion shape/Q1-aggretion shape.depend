@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1730981781 source:d:\iti\oop (c++)\day_7\q1-aggretion shape\main.cpp
+	<iostream>
+	<graphics.h>
+
