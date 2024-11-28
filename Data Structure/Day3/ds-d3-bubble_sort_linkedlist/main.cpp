@@ -6,7 +6,7 @@ using namespace std;
 int main() {
     LinkedList mylist;
     mylist.add(3);
-    mylist.add(4);
+    mylist.add(2);
     mylist.add(5);
     mylist.add(1);
 

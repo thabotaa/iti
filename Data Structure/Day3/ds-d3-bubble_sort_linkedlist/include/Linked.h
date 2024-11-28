@@ -94,9 +94,9 @@ public:
     void bubbleSort() {
         int swapped, i;
         Node* ptr1;
-        Node* lptr = NULL;
+      //  Node* lptr = NULL;
 
-        /* Checking for empty list */
+        // Checking for empty list
         if (head == NULL)
             return;
 
@@ -104,14 +104,14 @@ public:
             swapped = 0;
             ptr1 = head;
 
-            while (ptr1->Next != lptr) {
+            while (ptr1->Next != NULL) {
                 if (ptr1->Data > ptr1->Next->Data) {
                     swap(ptr1, ptr1->Next);
                     swapped = 1;
                 }
                 ptr1 = ptr1->Next;
             }
-            lptr = ptr1;
+       //     lptr = ptr1;
         }
         while (swapped);
     }

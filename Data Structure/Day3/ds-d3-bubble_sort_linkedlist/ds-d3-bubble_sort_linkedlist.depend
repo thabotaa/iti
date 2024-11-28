@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1732797300 source:d:\iti\data structure\day3\ds-d3-bubble_sort_linkedlist\main.cpp
+	<iostream>
+	"Linked.h"
+
+1732798842 d:\iti\data structure\day3\ds-d3-bubble_sort_linkedlist\include\linked.h
+	"Node.h"
+	<iostream>
+
+1732794803 d:\iti\data structure\day3\ds-d3-bubble_sort_linkedlist\include\node.h
+
