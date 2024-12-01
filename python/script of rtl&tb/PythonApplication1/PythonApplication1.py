@@ -1,6 +1,12 @@
 
                                                         ###functions
 
+
+
+
+
+
+
 def keyword_checker():
     cond = False
     keywords = ["always", "and", "assign", "automatic", "begin", "bind", "bit", "buf", "bufif0", "bufif1", "byte", "case", "casex", "casez", "cell", "class", "cmos", "config", 
@@ -15,16 +21,18 @@ def keyword_checker():
                 "sequence", "shortint", "shortreal", "showcancelled", "signed", "small", "solve", "specify", "specparam", "static", "string", "strong0", "strong1", "struct", 
                 "super", "supply0", "supply1", "table", "tagged", "task", "this", "throughout", "time", "timeprecision", "timeunit", "tran", "tranif0", "tranif1", "tri", "tri0", 
                 "tri1", "triand", "trior", "trireg", "type", "typedef", "union", "unique", "unsigned", "use", "var", "vectored", "virtual", "void", "wait", "wait_order", 
-                "wand", "weak0", "weak1", "while", "wire", "with", "within", "wor", "xnor", "xor"]
+                "wand", "weak0", "weak1", "while", "wire", "with", "within", "wor", "xnor", "xor",""]
 
     alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-
-    special_char = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", " ", "=", "+", "{", "}", "[", "]", "\\", "|", ";", ":", "'", "\"", ",", "<", ".", ">", "/", "?", "~", "`"]
+    
+    special_char = ["!", "@", "\n" ,"#", "$", "%", "^", "&", "*", "(", ")", "-", " ", "=", "+", "{", "}", "[", "]", "\\", "|", ";", ":", "'", "\"", ",", "<", ".", ">", "/", "?", "~", "`"]
     
     while (cond == False):
         temp_name = input("Enter string: ")
-        if temp_name[0] in alphabet:
+        if temp_name == "" or temp_name.isspace():
+              print("Sorry, you enter enter key")
+        elif temp_name[0] in alphabet:
             if temp_name in keywords:
                 print("Sorry, you entered a keyword.")
                 cond = False
@@ -38,9 +46,12 @@ def keyword_checker():
                     print("Sorry, you entered a string with a special character.")
                     cond = False
                 else:
-                    cond = True
-                    print("Name accepted.")
-                    return temp_name
+                    cond=if_exist(temp_name)
+                    if(cond==True):
+                        print("Name accepted.")
+                        return temp_name
+                    
+
         else:
             print("Sorry, you entered a non-string.")
 
@@ -51,10 +62,11 @@ def integer_checker():
     cond =False
     while (cond == False)  :
          try:
-              temp_number=int(input("please enter integer number  "))
+              temp_number=int(input("please enter positive integer number  "))
               if (type(temp_number) == type(5)) and (temp_number>=0):
-                  cond=True
-                  return temp_number
+                
+                      cond=True
+                      return temp_number
          except:
               print("sorry you input non integer number")
 
@@ -73,16 +85,16 @@ def YesNo_checker():
           print("wrong char")
           cond=False
 
+
 all_names=[]
 def if_exist(arg):
         while True:
             if arg in all_names:
                 print("this name exist ,please enter another name")
-                arg=input()
-                continue
+                return False
             else:
                 all_names.append(arg)
-                return arg
+                return True
                 break
             
 
@@ -94,7 +106,7 @@ def if_exist(arg):
     
 print("enter your module name")
 Module_name=keyword_checker()                          ###check if the first char is alphabet and saved in keyword or not and have special char or not
-if_exist(Module_name)                                  ###check if the name are existed or not
+##if_exist(Module_name)                                  ###check if the name are existed or not
 f=open(f"{Module_name.upper()}.v","w")                 ### write the module name in upper char
 f.write(f"module {Module_name.upper()}")
 f.close()
@@ -125,8 +137,8 @@ if(parameter_number!=0):
        print("enter name of parameters in your module ")
       ## parameter_name[i]=if_exist(parameter_name[i])
        parameter_name.append(keyword_checker())
-       parameter_name[i]=if_exist(parameter_name[i])
-       parameter_name.append(keyword_checker())
+      ## parameter_name[i]=if_exist(parameter_name[i])
+      ## parameter_name.append(keyword_checker())
        print("enter the value of this parameter")
        parameter_value.append(integer_checker())
        f=open(f"{Module_name.upper()}.v","a")
