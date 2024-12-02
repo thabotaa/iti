@@ -7,9 +7,9 @@
 
 
 
-def keyword_checker():
-    cond = False
-    keywords = ["always", "and", "assign", "automatic", "begin", "bind", "bit", "buf", "bufif0", "bufif1", "byte", "case", "casex", "casez", "cell", "class", "cmos", "config", 
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+keywords = ["always", "and", "assign", "automatic", "begin", "bind", "bit", "buf", "bufif0", "bufif1", "byte", "case", "casex", "casez", "cell", "class", "cmos", "config", 
                 "const", "constraint", "context", "continue", "cover", "covergroup", "coverpoint", "default", "defparam", "design", "disable", "dist", "do", "edge", "else", "end", 
                 "endcase", "endclass", "endconfig", "endfunction", "endgenerate", "endmodule", "endgroup", "endprimitive", "endspecify", "endtable", "endtask", "enum", "event", 
                 "expect", "export", "extends", "extern", "final", "first_match", "for", "force", "forever", "fork", "function", "generate", "genvar", "highz0", "highz1", "if", 
@@ -23,9 +23,8 @@ def keyword_checker():
                 "tri1", "triand", "trior", "trireg", "type", "typedef", "union", "unique", "unsigned", "use", "var", "vectored", "virtual", "void", "wait", "wait_order", 
                 "wand", "weak0", "weak1", "while", "wire", "with", "within", "wor", "xnor", "xor",""]
 
-    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-    
+def keyword_checker():
+    cond = False
     special_char = ["!", "@", "\n" ,"#", "$", "%", "^", "&", "*", "(", ")", "-", " ", "=", "+", "{", "}", "[", "]", "\\", "|", ";", ":", "'", "\"", ",", "<", ".", ">", "/", "?", "~", "`"]
     
     while (cond == False):
@@ -72,8 +71,7 @@ def integer_checker():
 
 def YesNo_checker():
 
-    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+  
     cond = False
     while (cond== False):
          temp_type=input(" please enter 'y'for yes or 'n' no   ")
@@ -96,6 +94,10 @@ def if_exist(arg):
                 all_names.append(arg)
                 return True
                 break
+
+def lowercase_string(arg):
+        if arg in keywords:
+            print(f"warning! the name is mostly like a reserved keyword,   {arg}")
             
 
 
@@ -105,8 +107,8 @@ def if_exist(arg):
   ############                              name of module         =================
     
 print("enter your module name")
-Module_name=keyword_checker()                          ###check if the first char is alphabet and saved in keyword or not and have special char or not
-##if_exist(Module_name)                                  ###check if the name are existed or not
+Module_name=keyword_checker()                          ###check if the first char is alphabet and saved in keyword or not and have special char or not && check if the name are existed or not
+lowercase_string(Module_name.lower())                                  
 f=open(f"{Module_name.upper()}.v","w")                 ### write the module name in upper char
 f.write(f"module {Module_name.upper()}")
 f.close()
@@ -135,10 +137,8 @@ if(parameter_number!=0):
     f1.write("(); parameter ")
     for i in range(parameter_number):
        print("enter name of parameters in your module ")
-      ## parameter_name[i]=if_exist(parameter_name[i])
        parameter_name.append(keyword_checker())
-      ## parameter_name[i]=if_exist(parameter_name[i])
-      ## parameter_name.append(keyword_checker())
+       lowercase_string(parameter_name[i].lower())
        print("enter the value of this parameter")
        parameter_value.append(integer_checker())
        f=open(f"{Module_name.upper()}.v","a")
@@ -181,35 +181,68 @@ while (cond== False):
     else:
         cond=True
 
+
 inputs_name=[]
 for i in range(inputs_num):
      print("enter input",i+1)
-     input_name = keyword_checker()      ###check if the first char is alphabet and saved in keyword or not and have special char or not
-     input_name=if_exist(input_name)      ###check name are exist before or not
-     inputs_name.append(input_name.capitalize())         ###put the input name withe first letter capita
-     print("are this  input paramterized")
-     parametrized=YesNo_checker()                      ###check your input parametrized
-     if(parametrized=="y")or (parametrized=="Y"):
-         for m in range(parameter_number):
-             print("are this the parameter you want",parameter_name[m])
-             parametrized=YesNo_checker()
-             if(parametrized=="y")or (parametrized=="Y"):
-                   f=open(f"{Module_name.upper()}.v","a")
-                   f.write(f" input wire  [{parameter_name[m]}-1:0] {inputs_name[m]},\n")
-                   f.close()
-                   f1=open(f"{Module_name.upper()}_tb.v","a")
-                   f1.write(f"  reg  [{parameter_name[m]}-1:0] {inputs_name[m]}_tb;\n")
-                   f1.close()
-                   break
-             else:
-                 continue
+     input_name = keyword_checker()      ###check if the first char is alphabet and saved in keyword or not and have special char or not && check name are exist before or not
+     lowercase_string(input_name.lower())     
+     inputs_name.append(input_name.capitalize())         ###put the input name with first letter capital
+     if(parameter_number!=0):
+        print("are this  input paramterized")
+        parametrized=YesNo_checker()                      ###check your input parametrized
+        if(parametrized=="y")or (parametrized=="Y"):
+               print("\n BE CAREFULL ,YOU MUST CHOOSE A PARAMETER \n")
+               for m in range(parameter_number):
+                       print("are this the parameter you want",parameter_name[m])
+                       parametrized=YesNo_checker()
+                       if(parametrized=="y")or (parametrized=="Y"):
+                            f=open(f"{Module_name.upper()}.v","a")
+                            f.write(f" input wire  [{parameter_name[m]}-1:0] {inputs_name[i]},\n")
+                            f.close()
+                            f1=open(f"{Module_name.upper()}_tb.v","a")
+                            f1.write(f"  reg  [{parameter_name[m]}-1:0] {inputs_name[i]}_tb;\n")
+                            f1.close()
+                            break
+                       else:
+                           continue
+        else:
+              print("enter the width you want ")
+              width=integer_checker()
+              if(width==1):
+                    f=open(f"{Module_name.upper()}.v","a")
+                    f.write(f" input wire {inputs_name[i]},\n")
+                    f.close()
+                    f1=open(f"{Module_name.upper()}_tb.v","a")
+                    f1.write(f" reg {inputs_name[i]}_tb;\n")
+                    f1.close()
+              else:
+                  f=open(f"{Module_name.upper()}.v","a")
+                  f.write(f" input wire [{width-1}:0] {inputs_name[i]},\n")
+                  f.close()
+                  f1=open(f"{Module_name.upper()}_tb.v","a")
+                  f1.write(f" reg [{width-1}:0] {inputs_name[i]}_tb;\n")
+                  f1.close()
      else:
-          f=open(f"{Module_name.upper()}.v","a")
-          f.write(f" input wire {inputs_name[i]},\n")
-          f.close()
-          f1=open(f"{Module_name.upper()}_tb.v","a")
-          f1.write(f" reg {inputs_name[i]}_tb;\n")
-          f1.close()
+         print("enter the width you want ")
+         width=integer_checker()
+         if(width==1):
+              f=open(f"{Module_name.upper()}.v","a")
+              f.write(f" input wire {inputs_name[i]},\n")
+              f.close()
+              f1=open(f"{Module_name.upper()}_tb.v","a")
+              f1.write(f" reg {inputs_name[i]}_tb;\n")
+              f1.close()
+         else:
+              f=open(f"{Module_name.upper()}.v","a")
+              f.write(f" input wire [{width-1}:0] {inputs_name[i]},\n")
+              f.close()
+              f1=open(f"{Module_name.upper()}_tb.v","a")
+              f1.write(f" reg [{width-1}:0] {inputs_name[i]}_tb;\n")
+              f1.close()
+
+
+
 
 
   ##################################      check system seq or not      =====================================================
@@ -245,31 +278,44 @@ outputs_name=[]
 for i in range(outputs_num):
      print("enter output",i+1)
      output_name = keyword_checker()
-     output_name=if_exist(output_name)
+     lowercase_string(output_name.lower())
      outputs_name.append(output_name.capitalize())
-     print("are this  output paramterized")
-     parametrized=YesNo_checker()
-     if(parametrized=="y")or (parametrized=="Y"):
-         for m in range(parameter_number):
-             print("are this the parameter you want",parameter_name[m])
-             parametrized=YesNo_checker()
-             if(parametrized=="y")or (parametrized=="Y"):
-                   f=open(f"{Module_name.upper()}.v","a")
-                   f.write(f" output reg  [{parameter_name[m]}-1:0] {outputs_name[m]},\n")
-                   f.close()
-                   f1=open(f"{Module_name.upper()}_tb.v","a")
-                   f1.write(f"  wire  [{parameter_name[m]}-1:0] {outputs_name[m]}_tb;\n")
-                   f1.close()
-                   break
+     if(parameter_number!=0):
+         print("are this  output paramterized")
+         parametrized=YesNo_checker()
+         if(parametrized=="y")or (parametrized=="Y"):
+            print("\n BE CAREFULL ,YOU MUST CHOOSE A PARAMETER \n")
+            for m in range(parameter_number):
+                   print("are this the parameter you want",parameter_name[m])
+                   parametrized=YesNo_checker()
+                   if(parametrized=="y")or (parametrized=="Y"):
+                            f=open(f"{Module_name.upper()}.v","a")
+                            f.write(f" output reg  [{parameter_name[m]}-1:0] {outputs_name[i]},\n")
+                            f.close()
+                            f1=open(f"{Module_name.upper()}_tb.v","a")
+                            f1.write(f"  wire  [{parameter_name[m]}-1:0] {outputs_name[i]}_tb;\n")
+                            f1.close()
+                            break
+                   else:
+                           continue
+         else:
+             print("enter the width you want ")
+             width=integer_checker()
+             if(width==1):
+                 f=open(f"{Module_name.upper()}.v","a")
+                 f.write(f" output reg {outputs_name[i]},\n")
+                 f.close()
+                 f1=open(f"{Module_name.upper()}_tb.v","a")
+                 f1.write(f" wire {outputs_name[i]}_tb;\n")
+                 f1.close()
              else:
-                 continue
-     else:
-          f=open(f"{Module_name.upper()}.v","a")
-          f.write(f" output reg {outputs_name[i]},\n")
-          f.close()
-          f1=open(f"{Module_name.upper()}_tb.v","a")
-          f1.write(f" wire {outputs_name[i]}_tb;\n")
-          f1.close()
+                 f=open(f"{Module_name.upper()}.v","a")
+                 f.write(f" output reg [{width-1}:0] {outputs_name[i]},\n")
+                 f.close()
+                 f1=open(f"{Module_name.upper()}_tb.v","a")
+                 f1.write(f" wire [{width-1}:0] {outputs_name[i]}_tb;\n")
+                 f1.close()
+
 
 
 f=open(f"{Module_name.upper()}.v","a")
@@ -299,8 +345,11 @@ for i in range(outputs_num):
     f1=open(f"{Module_name.upper()}_tb.v","a")
     f1.write(f"\n.{outputs_name[i]}({outputs_name[i]}_tb),")
     f1.close()
+
+print("enter the clock period")
+clock_period=integer_checker()
 f1=open(f"{Module_name.upper()}_tb.v","a")
-f1.write(f");\n\n\n\n\n parameter clock_period=10; \n always #(clock_period/2) CLK_tb=!CLK_tb;")
+f1.write(f");\n\n\n\n\n parameter clock_period={clock_period}; \n always #(clock_period/2) CLK_tb=!CLK_tb;")
 f1.close()
 
 
@@ -366,4 +415,3 @@ else:                                               ######### combinational
     f=open(f"{Module_name.upper()}.v","a")
     f.write(f"always@(*)\n begin \n\n\n\n\n end\n endmodule")
     f.close()
- 
