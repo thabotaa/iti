@@ -69,6 +69,21 @@ def integer_checker():
          except:
               print("sorry you input non integer number")
 
+def GreaterThanZero():
+    cond =False
+    while (cond == False)  :
+         try:
+              temp_number=int(input("please enter positive integer number  "))
+              if (type(temp_number) == type(5)) and (temp_number>0):
+                
+                      cond=True
+                      return temp_number
+         except:
+              print("sorry you input non integer number")
+
+
+
+
 def YesNo_checker():
 
   
@@ -208,7 +223,7 @@ for i in range(inputs_num):
                            continue
         else:
               print("enter the width you want ")
-              width=integer_checker()
+              width=GreaterThanZero()
               if(width==1):
                     f=open(f"{Module_name.upper()}.v","a")
                     f.write(f" input wire {inputs_name[i]},\n")
@@ -225,7 +240,7 @@ for i in range(inputs_num):
                   f1.close()
      else:
          print("enter the width you want ")
-         width=integer_checker()
+         width=GreaterThanZero()
          if(width==1):
               f=open(f"{Module_name.upper()}.v","a")
               f.write(f" input wire {inputs_name[i]},\n")
@@ -300,7 +315,7 @@ for i in range(outputs_num):
                            continue
          else:
              print("enter the width you want ")
-             width=integer_checker()
+             width=GreaterThanZero()
              if(width==1):
                  f=open(f"{Module_name.upper()}.v","a")
                  f.write(f" output reg {outputs_name[i]},\n")
@@ -315,7 +330,23 @@ for i in range(outputs_num):
                  f1=open(f"{Module_name.upper()}_tb.v","a")
                  f1.write(f" wire [{width-1}:0] {outputs_name[i]}_tb;\n")
                  f1.close()
-
+     else:
+         print("enter the width you want ")
+         width=GreaterThanZero()
+         if(width==1):
+              f=open(f"{Module_name.upper()}.v","a")
+              f.write(f" input wire {inputs_name[i]},\n")
+              f.close()
+              f1=open(f"{Module_name.upper()}_tb.v","a")
+              f1.write(f" reg {inputs_name[i]}_tb;\n")
+              f1.close()
+         else:
+              f=open(f"{Module_name.upper()}.v","a")
+              f.write(f" input wire [{width-1}:0] {inputs_name[i]},\n")
+              f.close()
+              f1=open(f"{Module_name.upper()}_tb.v","a")
+              f1.write(f" reg [{width-1}:0] {inputs_name[i]}_tb;\n")
+              f1.close()
 
 
 f=open(f"{Module_name.upper()}.v","a")
@@ -347,7 +378,7 @@ for i in range(outputs_num):
     f1.close()
 
 print("enter the clock period")
-clock_period=integer_checker()
+clock_period=GreaterThanZero()
 f1=open(f"{Module_name.upper()}_tb.v","a")
 f1.write(f");\n\n\n\n\n parameter clock_period={clock_period}; \n always #(clock_period/2) CLK_tb=!CLK_tb;")
 f1.close()
